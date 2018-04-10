@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.invictus.bean">
+
+	<class name="DependentBean" table="HIS_DEPENDENT">
+		<id name="dependentHid" column="D_HID">
+			<generator class="sequence">
+				<param name="sequence">HIS_HID_SEQ</param>
+			</generator>
+		</id>
+
+		<property name="beneficiaryName" column="BENEFICIARY_NAME" />
+		<property name="relation" column="RELATION" />
+		<property name="dob" column="DOB" />
+		<property name="gender" column="GENDER" />
+		<property name="policyDate" column="POLICY_DATE" />
+		<property name="policyPeriod" column="POLICY_PERIOD" />
+		<property name="totalSumInsured" column="TOTAL_SUM_INSURED" />
+		<property name="premiumAmount" column="PREMIUM_AMOUNT" />
+		<property name="requestSubmitDate_Time" column="REQUEST_SUBMIT_DATE" />
+		<property name="approvalDate" column="APPROVAL_DATE"
+			not-null="false" />
+		<property name="status" column="STATUS" />
+
+
+		<many-to-one name="employee" class="com.invictus.bean.EmployeeBean"
+			fetch="select">
+			<column name="FOR_EMP_HID" not-null="true" />
+		</many-to-one>
+
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping package="com.invictus.bean">
+<class table=" HIS_EMPLOYEE" name="com.invictus.bean.EmployeeBean">
+
+
+<id name="empHid" column="E_HID">
+
+<generator class="sequence">
+			<param name = "sequence" >HIS_HID_SEQ</param>
+</generator>
+
+</id>
+
+<property name="employeeId" column="EMP_ID" not-null="true" unique="true"/>
+<property name="employeeName" column="EMP_NAME" not-null="true"/>
+<property name="dateOfBirth" column="DOB" not-null="true"/>
+<property name="gender" column="GENDER" not-null="true"/>
+<property name="Email" column="EMAIL" not-null="true"/>
+<property name="alternateEmail" column="ALTERNATE_EMAIL" not-null="true"/>
+<property name="phoneNumber" column="PHONE_NO" not-null="true" length="10"/>
+<property name="alternateMobileNumber" column="ALTERNATE_MOBILE_NO"  length="10"/>
+<property name="policyStartDate" column="POLICY_START_DATE" not-null="true"/>
+<property name="policyPeriod" column="POLICY_PERIOD" not-null="true"/>
+<property name="totalSumInsured" column="TOTAL_SUM_INSURED" not-null="true"/>
+<property name="premiumAmount" column="PREMIUM_AMOUNT"/>
+<property name="companyName" column="COMPANY_NAME" not-null="true"/>
+<property name="requestSubmitDate_Time" column="REQUEST_SUBMIT_DATE_TIME"  not-null="true"/>
+<property name="approvalDate" column="APPROVAL_DATE" not-null="false" />
+<property name="status" column="STATUS"/>
+
+
+<one-to-one name="bankDetails" class="com.invictus.bean.BankDetailsBean"></one-to-one>
+
+<one-to-one name="login" class="com.invictus.bean.EmployeeLoginBean"></one-to-one>
+
+
+<set name="dependents"  inverse="true" lazy="true" fetch="select" cascade="all">
+            <key>
+                <column name="FOR_EMP_HID" not-null="true" />
+            </key>
+ <one-to-many class="com.invictus.bean.DependentBean" />
+        </set>
+
+</class>
+
+</hibernate-mapping>
